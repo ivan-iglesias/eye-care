@@ -5,18 +5,74 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EyeCare</title>
+
+    <style>
+        html {
+            font-size: 16px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #3b5998;
+            background: #f7f7f7;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+        }
+
+        a {
+            color: #3b5998;
+            text-decoration: none;
+        }
+
+        .timer {
+            border: 20px solid #8b9dc3;
+            height: 200px;
+            width: 200px;
+            border-radius: 50%;
+            -moz-border-radius: 50%;
+            -webkit-border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .timer-reset {
+            font-size: 1.5rem;
+            margin: 1rem;
+            opacity: 0.7;
+        }
+
+        .timer-reset:hover {
+            opacity: 1;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
-    <p id="timer"></p>
+    <div class="container">
+        <div class="timer"></div>
 
-    <button onclick="resetTimer()">RESET</button>
+        <a href="#" class="timer-reset" onclick="resetTimer()">
+            RESET
+        </a>
+    </div>
 
     <script>
         const countDowns = [
             20 * 60,    // 20 minutes
             20          // 20 seconds
         ];
-        const display = document.getElementById("timer");
+        const display = document.getElementsByClassName("timer")[0];
 
         let interval = null;
 
