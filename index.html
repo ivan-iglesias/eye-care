@@ -68,6 +68,7 @@
     </div>
 
     <script>
+        const beep = './beep.mp3';
         const countDowns = [
             20 * 60,    // 20 minutes
             20          // 20 seconds
@@ -98,6 +99,7 @@
                 } else {
                     countDownIndex++;
                     countDownIndex = countDownIndex < countDowns.length ? countDownIndex : 0;
+                    new Audio(beep).play();
                     startTimer(countDownIndex, display);
                 }
             };
