@@ -12,17 +12,18 @@
     <button onclick="resetTimer()">RESET</button>
 
     <script>
-        const twentyMinutes = 20 * 60,
-              display = document.getElementById('timer');
+        const countDowns = [
+            20 * 60,    // 20 minutes
+            20          // 20 seconds
+        ];
+        const display = document.getElementById("timer");
 
         let interval = null;
 
-        window.onload = function () {
-            startTimer(twentyMinutes, display);
-        };
+        window.onload = () => startTimer(0, display);
 
-        function startTimer(duration, display) {
-            let counter = duration;
+        function startTimer(countDownIndex, display) {
+            let counter = countDowns[countDownIndex];
 
             if (interval != null) {
                 clearInterval(interval);
@@ -35,12 +36,13 @@
                 minutes = minutes.toString().padStart(2, '0');
                 seconds = seconds.toString().padStart(2, '0');
 
-                display.innerHTML = minutes + ":" + seconds;
-
-                if (counter > 0) {
+                if (counter >= 0) {
+                    display.innerHTML = minutes + ":" + seconds;
                     counter = --counter;
                 } else {
-                    clearInterval(interval);
+                    countDownIndex++;
+                    countDownIndex = countDownIndex < countDowns.length ? countDownIndex : 0;
+                    startTimer(countDownIndex, display);
                 }
             };
 
@@ -49,7 +51,7 @@
         }
 
         function resetTimer() {
-            startTimer(twentyMinutes, display);
+            startTimer(0, display);
         }
     </script>
 </body>
