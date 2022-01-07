@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3b5998">
+
     <title>EyeCare</title>
 
     <style>
@@ -79,6 +81,12 @@
 
         window.onload = () => startTimer(0, display);
 
+        document.onvisibilitychange = () => {
+            if (document.visibilityState === 'visible') {
+                setTitleText();
+            }
+        };
+
         function startTimer(countDownIndex, display) {
             let counter = countDowns[countDownIndex];
 
@@ -100,6 +108,7 @@
                     countDownIndex++;
                     countDownIndex = countDownIndex < countDowns.length ? countDownIndex : 0;
                     new Audio(beep).play();
+                    setTitleText('✋ Take a break!');
                     startTimer(countDownIndex, display);
                 }
             };
@@ -108,7 +117,12 @@
             interval = setInterval(timer, 1000);
         }
 
+        function setTitleText(text = 'EyeCare') {
+            document.title = text;
+        }
+
         function resetTimer() {
+            setTitleText();
             startTimer(0, display);
         }
     </script>
